@@ -1,11 +1,47 @@
 <p>rooms works!</p>
 <!-- Notice the colSpan property is camel case -->
-<tr><td [colSpan]="1 + 1">Three-Four</td></tr><br><br>
+<tr>
+  <td [colSpan]="1 + 1">Three-Four</td>
+</tr>
+<br /><br />
 
-<div [hidden] = 'hiddenRoom'>
-    Number of Rooms:
-    <div [innerText] = "numberOfRooms"></div>
-
+<div [hidden]="hiddenRoom">
+  Number of Rooms:
+  <div [innerText]="numberOfRooms"></div>
 </div>
 
-<button (click) = "toggle()">Alert</button>
+<button (click)="toggle()">Alert</button>
+
+{{ rooms?.avaliableRoom ?? "No rooms" }}
+
+<!-- <div *ngIf="rooms && rooms.avaliableRoom && rooms.avaliableRoom == 0"> -->
+<table>
+  <thead>
+    <tr>
+        <th>S. N.</th>
+        <th>Even/Odd</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Photo</th>
+      <th>CheckInDate</th>
+      <th>CheckOutDate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let test of roomList, let e= even, let o=odd, let i = index">
+      <td >{{i}}</td>
+      <td [ngClass] = "{'even': e, 'odd':o}">{{e ? 'Even':'Odd'}}</td>
+      <td >{{ test.roomType }}</td>
+      <td>{{ test.amenities }}</td>
+      <td>{{ test.price }}</td>
+      <td>{{ test.photo }}</td>
+      <td>{{ test.checInDate | date }}</td>
+      <td>{{ test.checkOutDate | date }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!--</div> -->
+
+<br />
